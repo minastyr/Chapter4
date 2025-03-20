@@ -9,3 +9,38 @@
 // TODO: Call the `renderBlogList` function
 
 // TODO: Redirect to the home page using the `redirectPage` function found in logic.js when the back button is clicked
+
+document.getElementById('back').addEventListener('click', function () {
+    // Redirect to the index.html page
+    window.location.href = './index.html';
+  });
+
+  // Function to display blog posts from local storage
+function displayBlogPosts() {
+    const blogPostsContainer = document.getElementById('blog-posts');
+  
+    // Retrieve blog posts from local storage
+    const formData = JSON.parse(localStorage.getItem('formData'));
+  
+    // Check if there are any posts
+    if (!formData) {
+      blogPostsContainer.innerHTML = '<p>No Blog posts yet...</p>';
+      return;
+    }
+  
+    // Create a blog post element
+    const postElement = document.createElement('div');
+    postElement.classList.add('blog-post');
+  
+    postElement.innerHTML = `
+      <h2>${formData.title}</h2>
+      <p><strong>By:</strong> ${formData.username}</p>
+      <p>${formData.content}</p>
+    `;
+  
+    // Append the post to the container
+    blogPostsContainer.appendChild(postElement);
+  }
+  
+  // Call the function to display blog posts
+  displayBlogPosts();
